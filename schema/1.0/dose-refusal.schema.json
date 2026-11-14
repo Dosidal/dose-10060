@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dose-10060.org/schema/1.0/dose-refusal.schema.json",
+  "title": "DOSE-10060 refusal",
+  "description": "The fixed shape of a refused read. A refusal is an answer and is receipted like one. Version 1.0, 2026-11-14.",
+  "type": "object",
+  "required": [
+    "refused",
+    "code",
+    "message",
+    "notice"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "refused": {
+      "const": true
+    },
+    "code": {
+      "enum": [
+        "OUT_OF_SCOPE_CLINICAL",
+        "OUT_OF_SCOPE_PRODUCT",
+        "UNRESOLVED_AGENT",
+        "LICENCE_REQUIRED",
+        "UNKNOWN_MARKET"
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "label_reference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "The regulator's copy of the label, where the subject was resolved."
+    },
+    "refer_to": {
+      "type": "string",
+      "description": "For OUT_OF_SCOPE_CLINICAL: the prescriber or pharmacist."
+    },
+    "scope": {
+      "const": "Dosidal is a product record. It identifies a medicine and its regulatory status. It does not advise on use."
+    },
+    "notice": {
+      "type": "string"
+    }
+  }
+}

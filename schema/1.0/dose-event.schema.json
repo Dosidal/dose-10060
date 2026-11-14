@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dose-10060.org/schema/1.0/dose-event.schema.json",
+  "title": "DOSE-10060 change event",
+  "description": "One change to one field of one record. Events form a hash chain per market. Version 1.0, 2026-11-14.",
+  "type": "object",
+  "required": [
+    "event_id",
+    "seq",
+    "market",
+    "record_id",
+    "subject_id",
+    "field",
+    "change",
+    "to_version",
+    "observed_at",
+    "prev_hash",
+    "hash",
+    "kid",
+    "sig"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "market": {
+      "type": "string"
+    },
+    "record_id": {
+      "type": "string"
+    },
+    "subject_id": {
+      "type": "string"
+    },
+    "field": {
+      "type": "string"
+    },
+    "change": {
+      "enum": [
+        "set",
+        "changed",
+        "corrected",
+        "went_stale",
+        "went_unknown",
+        "holder_asserted",
+        "withdrawn"
+      ]
+    },
+    "from_version": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "to_version": {
+      "type": "integer"
+    },
+    "effective_from": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "publisher": {
+          "type": "string"
+        }
+      }
+    },
+    "prev_hash": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hash": {
+      "type": "string"
+    },
+    "kid": {
+      "type": "string"
+    },
+    "sig": {
+      "type": "string"
+    }
+  }
+}

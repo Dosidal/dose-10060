@@ -1,0 +1,27 @@
+{
+  "title": "DOSE-10060 receipt profile on RCO-10060",
+  "description": "How a cleared read of a DOSE-10060 record is receipted. The receipt object is RCO-10060 receipt v1, unchanged; this profile fixes what each field carries for a medicine read. Version 1.0, 2026-11-14.",
+  "receipt_v1_fields": {
+    "v": "1",
+    "id": "Receipt identifier",
+    "seq": "Position in the issuer's chain",
+    "writer": "The Dosidal door that served the read",
+    "caller": "The resolved agent identity; 'public' for an open read",
+    "subject": "The record's subject id",
+    "subject_type": "substance | presentation | authorisation",
+    "market": "The market the record was read under",
+    "rule_version": "standard_version + instance_version + the access rule applied, joined in that order",
+    "cleared_at": "When the read was cleared",
+    "answer_hash": "SHA-256 of the canonicalised signed record supplied. The only link between receipt and record.",
+    "prev_hash": "Hash of the previous receipt in the chain",
+    "hash": "Hash of this receipt",
+    "sig": "Signature under the receipt key",
+    "kid": "Receipt key identifier"
+  },
+  "rules": [
+    "The receipt key and the record key are different keys. Neither signs the other's object.",
+    "An as-of read is receipted with the as_of date inside the hashed record, so the receipt binds to the historical answer.",
+    "A refused read is receipted too, with the refusal as the answer.",
+    "Verifying a receipt needs no credential."
+  ]
+}
