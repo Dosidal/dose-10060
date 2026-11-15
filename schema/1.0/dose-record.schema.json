@@ -377,7 +377,8 @@
       "additionalProperties": false,
       "properties": {
         "alg": {
-          "const": "EdDSA"
+          "const": "ES256",
+          "description": "ECDSA on the P-256 curve with SHA-256. Held natively by the key vault."
         },
         "kid": {
           "type": "string",

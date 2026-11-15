@@ -1,0 +1,79 @@
+{
+  "_note": "ILLUSTRATION ONLY. Invented medicine, invented identifiers, invented sources. Shows shape, not fact.",
+  "standard": "DOSE-10060",
+  "standard_version": "1.0",
+  "instance": "US-DOSE-10060",
+  "instance_version": "1.0",
+  "schema_version": "1.0",
+  "record_id": "us:authorisation:EXAMPLE-000001",
+  "version": 3,
+  "supersedes": 2,
+  "as_of": null,
+  "subject": {
+    "level": "authorisation",
+    "id": "us:authorisation:EXAMPLE-000001",
+    "identifiers": [
+      {
+        "system": "example-application-number",
+        "value": "EXAMPLE-000001"
+      }
+    ],
+    "relations": [
+      {
+        "rel": "authorisation_of",
+        "id": "presentation:EXAMPLE-P1"
+      },
+      {
+        "rel": "presentation_of",
+        "id": "substance:EXAMPLE-S1"
+      }
+    ],
+    "anchor": null
+  },
+  "market": "US",
+  "authority": {
+    "name": "Example regulator",
+    "register": "Example register"
+  },
+  "fields": {
+    "authorisation_status": {
+      "value": {
+        "term": "Example status term",
+        "term_language": "en"
+      },
+      "state": "current",
+      "source": {
+        "url": "https://example.org/register/EXAMPLE-000001",
+        "publisher": "Example regulator",
+        "published": "2026-10-01"
+      },
+      "read_at": "2026-11-14T00:00:00Z",
+      "effective_from": "2026-10-01",
+      "clock": {
+        "class": "short",
+        "expires_at": "2026-11-21T00:00:00Z"
+      },
+      "asserted_by": "node"
+    },
+    "controlled_status": {
+      "state": "not_applicable",
+      "asserted_by": "node"
+    },
+    "authorised_channel": {
+      "state": "unknown",
+      "asserted_by": "holder"
+    }
+  },
+  "produced_at": "2026-11-14T00:00:00Z",
+  "node": {
+    "id": "us.dose-10060.org",
+    "door": "https://mcp.dosidal.ai"
+  },
+  "notice": "Artificial intelligence makes mistakes. Read the regulator.",
+  "signature": {
+    "alg": "ES256",
+    "kid": "example-record-key-1",
+    "canon": "JCS",
+    "sig": "EXAMPLE"
+  }
+}
