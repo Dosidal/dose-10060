@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://dose-10060.org/schema/1.0/dose-event.schema.json",
   "title": "DOSE-10060 change event",
-  "description": "One change to one field of one record. Events form a hash chain per market. Version 1.0, 2026-11-14.",
+  "description": "One change to one field of one record. Events form a hash chain per market. Version 1.0, 2026-11-14; amended 2026-11-16 (ORDER DOSIDAL-05): the change read_confirmed records a re-read that found versions unchanged. A signed version is never rewritten; the read date is recorded by this event. For read_confirmed, record_id and subject_id are \"*\", field is \"read_at\", to_version is 0, and confirmed states how many versions were confirmed, the latest read date, and the SHA-256 of their sorted record_id@version@read_at lines.",
   "type": "object",
   "required": [
     "event_id",
@@ -48,7 +48,8 @@
         "went_stale",
         "went_unknown",
         "holder_asserted",
-        "withdrawn"
+        "withdrawn",
+        "read_confirmed"
       ]
     },
     "from_version": {
@@ -97,6 +98,27 @@
     },
     "sig": {
       "type": "string"
+    },
+    "confirmed": {
+      "type": "object",
+      "required": [
+        "versions",
+        "sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "versions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "read_at_max": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sha256": {
+          "type": "string"
+        }
+      }
     }
   }
 }
