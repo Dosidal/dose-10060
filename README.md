@@ -1,6 +1,6 @@
 # dose-10060
 
-DOSE-10060 is the open standard for the signed record of a prescription medicine, held by Dosidal AI Corp. under the MIT licence. Dosidal is a product record. It identifies a medicine and its regulatory status. It does not advise on use.
+Dosidal powers the agentic era of pharma. AI agents and AI labs connect to Dosidal for the facts on prescription medicines in global markets: the regulator's own record of each medicine, signed, sourced and dated. Dosidal identifies a medicine; it does not advise on its use.
 
 - https://dose-10060.org
 - [DOSE-10060_Canonical-Text_v1.1.md](DOSE-10060_Canonical-Text_v1.1.md)
