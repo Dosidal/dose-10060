@@ -1,5 +1,7 @@
 # DOSE-10060
 
+> **Superseded.** Version 1.1 was replaced on 17 November 2026 by version 1.2: [DOSE-10060_Canonical-Text_v1.2.md](DOSE-10060_Canonical-Text_v1.2.md). This file stays published, unchanged below this note.
+
 DRUG OBJECT SIGNED ELECTRONIC · CANONICAL TEXT V1.1 · dose-10060.org
 
 DOSE-10060 defines the signed record of a prescription medicine, and the evidence behind it. Each producing node identifies the medicine, binds its record to the jurisdiction it was read under, preserves the source and read date of every field, and signs its own content. The jurisdiction instances of DOSE-10060 implement this contract market by market. A cleared read is evidenced separately by an RCO-10060 (Record of Cleared Orders) receipt whose answer hash binds it to the signed record supplied. Together they let an agent identify the medicine, inspect the provenance of what is said about it, verify the publisher and keep evidence of the read. DOSE-10060 carries no dosing advice, no clinical guidance and no recommendation.

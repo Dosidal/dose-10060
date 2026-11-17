@@ -1,0 +1,370 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dose-10060.org/schema/1.2/dose-record.schema.json",
+  "title": "DOSE-10060 record",
+  "description": "The signed record of a prescription medicine at one subject level in one market. Every field is sourced and dated. Version 1.2, 2026-11-17.",
+  "type": "object",
+  "required": [
+    "standard",
+    "standard_version",
+    "instance",
+    "instance_version",
+    "schema_version",
+    "record_id",
+    "version",
+    "subject",
+    "market",
+    "authority",
+    "fields",
+    "produced_at",
+    "node",
+    "signature"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "standard": {
+      "const": "DOSE-10060"
+    },
+    "standard_version": {
+      "type": "string"
+    },
+    "instance": {
+      "type": "string",
+      "description": "Country-first instance name, for example US-DOSE-10060."
+    },
+    "instance_version": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "record_id": {
+      "type": "string",
+      "description": "Stable across versions of the same subject in the same market."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "supersedes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "The version this one corrects or replaces. Earlier versions stay retrievable."
+    },
+    "as_of": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Present when the record answers for a past date; null for a current read."
+    },
+    "subject": {
+      "$ref": "#/$defs/subject"
+    },
+    "market": {
+      "type": "string",
+      "description": "The market the record was read under. Machine code; UK is written UK in all copy."
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "register": {
+          "type": "string"
+        }
+      },
+      "description": "The authority that made the decision. Cited source, never the signer."
+    },
+    "fields": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pack_product_code": {
+          "$ref": "#/$defs/field"
+        },
+        "identity": {
+          "$ref": "#/$defs/field"
+        },
+        "authorisation_status": {
+          "$ref": "#/$defs/field"
+        },
+        "prescription_class": {
+          "$ref": "#/$defs/field"
+        },
+        "controlled_status": {
+          "$ref": "#/$defs/field"
+        },
+        "label_reference": {
+          "$ref": "#/$defs/field"
+        },
+        "storage_and_handling": {
+          "$ref": "#/$defs/field"
+        },
+        "authorised_channel": {
+          "$ref": "#/$defs/field"
+        },
+        "recalls_and_notices": {
+          "$ref": "#/$defs/field"
+        }
+      }
+    },
+    "produced_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "node": {
+      "type": "object",
+      "required": [
+        "id",
+        "door"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "door": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "notice": {
+      "type": "string",
+      "description": "Carried on every response: artificial intelligence makes mistakes; read the regulator."
+    },
+    "signature": {
+      "$ref": "#/$defs/signature"
+    }
+  },
+  "$defs": {
+    "subject": {
+      "type": "object",
+      "required": [
+        "level",
+        "id",
+        "identifiers"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "enum": [
+            "substance",
+            "presentation",
+            "authorisation"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "identifiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "system",
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "system": {
+                "type": "string",
+                "description": "The identifier's own namespace. Namespaces are never merged."
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "rel",
+              "id"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "rel": {
+                "enum": [
+                  "substance_of",
+                  "presentation_of",
+                  "authorisation_of"
+                ]
+              },
+              "id": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "anchor": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "system",
+            "value"
+          ],
+          "properties": {
+            "system": {
+              "type": "string",
+              "description": "The pack product code system, for example gtin."
+            },
+            "value": {
+              "type": "string"
+            },
+            "basis": {
+              "enum": [
+                "derived_from_register",
+                "published_by_authority",
+                "holder_asserted"
+              ]
+            }
+          },
+          "description": "The pack product code that anchors a presentation. Identifies the product, never an individual box. Null where no code exists."
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "required": [
+        "state",
+        "asserted_by"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "description": "The field's content in the market's own terms as published. Absent when state is unknown or not_applicable."
+        },
+        "state": {
+          "enum": [
+            "current",
+            "unknown",
+            "not_applicable",
+            "conflict"
+          ],
+          "description": "Unknown is returned as unknown."
+        },
+        "source": {
+          "type": "object",
+          "required": [
+            "url",
+            "publisher"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "publisher": {
+              "type": "string"
+            },
+            "published": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date"
+            }
+          }
+        },
+        "read_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the node read the source."
+        },
+        "effective_from": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date",
+          "description": "When the stated value took effect, as the source gives it."
+        },
+        "asserted_by": {
+          "enum": [
+            "node",
+            "holder"
+          ],
+          "description": "Holder assertions are signed by the authorisation holder's own key."
+        },
+        "holder_signature": {
+          "$ref": "#/$defs/signature"
+        },
+        "candidates": {
+          "type": "array",
+          "description": "Present when state is conflict and no rule selected a value."
+        },
+        "selection_rule": {
+          "type": "string",
+          "description": "The rule that resolved a conflict between sources."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "current"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "value",
+              "source",
+              "read_at"
+            ]
+          }
+        }
+      ]
+    },
+    "signature": {
+      "type": "object",
+      "required": [
+        "alg",
+        "kid",
+        "sig"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "alg": {
+          "const": "ES256",
+          "description": "ECDSA on the P-256 curve with SHA-256. Held natively by the key vault."
+        },
+        "kid": {
+          "type": "string",
+          "description": "Key identifier published at the signer's /.well-known/jwks.json."
+        },
+        "canon": {
+          "const": "JCS",
+          "description": "The payload is canonicalised (RFC 8785) before hashing and signing."
+        },
+        "sig": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

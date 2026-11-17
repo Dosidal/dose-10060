@@ -3,6 +3,17 @@
 Dosidal powers the agentic era of pharma. AI agents and AI labs connect to Dosidal for the facts on prescription medicines in global markets: the regulator's own record of each medicine, signed, sourced and dated. Dosidal identifies a medicine; it does not advise on its use.
 
 - https://dose-10060.org
+
+## Current: version 1.2 (17 November 2026)
+
+- [DOSE-10060_Canonical-Text_v1.2.md](DOSE-10060_Canonical-Text_v1.2.md)
+- [schema/1.2/dose-event.schema.json](schema/1.2/dose-event.schema.json)
+- [schema/1.2/dose-receipt.profile.json](schema/1.2/dose-receipt.profile.json)
+- [schema/1.2/dose-record.schema.json](schema/1.2/dose-record.schema.json)
+- [schema/1.2/dose-refusal.schema.json](schema/1.2/dose-refusal.schema.json)
+
+## Superseded: version 1.1 and schema 1.0
+
 - [DOSE-10060_Canonical-Text_v1.1.md](DOSE-10060_Canonical-Text_v1.1.md)
 - [schema/1.0/dose-event.schema.json](schema/1.0/dose-event.schema.json)
 - [schema/1.0/dose-receipt.profile.json](schema/1.0/dose-receipt.profile.json)

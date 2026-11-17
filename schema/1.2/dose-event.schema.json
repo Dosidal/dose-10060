@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dose-10060.org/schema/1.2/dose-event.schema.json",
+  "title": "DOSE-10060 change event",
+  "description": "One change to one field of one record. Events form a hash chain per market. Version 1.2, 2026-11-17.",
+  "type": "object",
+  "required": [
+    "event_id",
+    "seq",
+    "market",
+    "record_id",
+    "subject_id",
+    "field",
+    "change",
+    "to_version",
+    "observed_at",
+    "prev_hash",
+    "hash",
+    "kid",
+    "sig"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "market": {
+      "type": "string"
+    },
+    "record_id": {
+      "type": "string"
+    },
+    "subject_id": {
+      "type": "string"
+    },
+    "field": {
+      "type": "string"
+    },
+    "change": {
+      "enum": [
+        "set",
+        "changed",
+        "corrected",
+        "went_stale",
+        "went_unknown",
+        "holder_asserted",
+        "withdrawn",
+        "read_confirmed"
+      ],
+      "$comment": "went_stale is kept only so that history validates: 17 EU events of November 2026, each followed by a version that corrected it. No event written under version 1.2 carries it."
+    },
+    "from_version": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "to_version": {
+      "type": "integer"
+    },
+    "effective_from": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "publisher": {
+          "type": "string"
+        }
+      }
+    },
+    "prev_hash": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hash": {
+      "type": "string"
+    },
+    "kid": {
+      "type": "string"
+    },
+    "sig": {
+      "type": "string"
+    },
+    "confirmed": {
+      "type": "object",
+      "required": [
+        "versions",
+        "sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "versions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "read_at_max": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sha256": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

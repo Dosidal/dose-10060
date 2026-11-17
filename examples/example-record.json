@@ -1,10 +1,10 @@
 {
   "_note": "ILLUSTRATION ONLY. Invented medicine, invented identifiers, invented sources. Shows shape, not fact.",
   "standard": "DOSE-10060",
-  "standard_version": "1.0",
+  "standard_version": "1.2",
   "instance": "US-DOSE-10060",
   "instance_version": "1.0",
-  "schema_version": "1.0",
+  "schema_version": "1.2",
   "record_id": "us:authorisation:EXAMPLE-000001",
   "version": 3,
   "supersedes": 2,
@@ -49,10 +49,6 @@
       },
       "read_at": "2026-11-14T00:00:00Z",
       "effective_from": "2026-10-01",
-      "clock": {
-        "class": "short",
-        "expires_at": "2026-11-21T00:00:00Z"
-      },
       "asserted_by": "node"
     },
     "controlled_status": {
