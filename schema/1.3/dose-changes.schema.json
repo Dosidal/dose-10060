@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dose-10060.org/schema/1.3/dose-changes.schema.json",
+  "title": "DOSE-10060 list of changes",
+  "description": "The real changes to a market's cards since a date, oldest first. Reads that found nothing changed are left out. A reissue is left out too unless it is asked for, and is marked reissued when it is listed. Version 1.3, 2026-11-18.",
+  "type": "object",
+  "required": [
+    "market",
+    "since",
+    "changes",
+    "next",
+    "checkpoint"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "market": {
+      "type": "string"
+    },
+    "since": {
+      "type": "string",
+      "description": "The date asked for."
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "$ref": "https://dose-10060.org/schema/1.3/dose-event.schema.json"
+      }
+    },
+    "next": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Give this as after to read on; null at the end of the list."
+    },
+    "checkpoint": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "type",
+            "standard",
+            "market",
+            "seq",
+            "head_hash",
+            "at",
+            "kid",
+            "sig"
+          ],
+          "additionalProperties": false,
+          "description": "The signed head of the market's chain: ES256 over the JCS form of the checkpoint without sig, under the record key.",
+          "properties": {
+            "type": {
+              "const": "chain_checkpoint"
+            },
+            "standard": {
+              "const": "DOSE-10060"
+            },
+            "market": {
+              "type": "string"
+            },
+            "seq": {
+              "type": "integer"
+            },
+            "head_hash": {
+              "type": "string"
+            },
+            "at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "kid": {
+              "type": "string"
+            },
+            "sig": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

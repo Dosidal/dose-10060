@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dose-10060.org/schema/1.3/dose-stamp.schema.json",
+  "title": "DOSE-10060 stamp",
+  "description": "The date a market's cards were last checked against the regulator. One signed stamp per full read of a market; every card of the market shows it. A stamp is a date, not a countdown: nothing expires. It is attached to a card when the card is served and is not inside the signed card. Version 1.3, 2026-11-18.",
+  "type": "object",
+  "required": [
+    "type",
+    "standard",
+    "standard_version",
+    "market",
+    "checked",
+    "read_at",
+    "covers",
+    "kid",
+    "sig"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "stamp"
+    },
+    "standard": {
+      "const": "DOSE-10060"
+    },
+    "standard_version": {
+      "type": "string"
+    },
+    "market": {
+      "type": "string"
+    },
+    "checked": {
+      "type": "string",
+      "format": "date",
+      "description": "The day of the last full read of the market."
+    },
+    "read_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When that read ended."
+    },
+    "covers": {
+      "type": "object",
+      "required": [
+        "cards",
+        "seq",
+        "head_hash"
+      ],
+      "additionalProperties": false,
+      "description": "What the stamp covers: the market's cards as they stand at this point of the market's chain of changes.",
+      "properties": {
+        "cards": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "head_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "kid": {
+      "type": "string",
+      "description": "The record key, in the keyring."
+    },
+    "sig": {
+      "type": "string",
+      "description": "ES256 (raw r||s, base64url) over the JCS (RFC 8785) form of the stamp without sig."
+    }
+  }
+}

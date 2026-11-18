@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dose-10060.org/schema/1.3/dose-event.schema.json",
+  "title": "DOSE-10060 change",
+  "description": "One change to one part of one card. The changes of a market form a hash chain: each carries the hash of the one before. A change is not signed one by one; the chain is signed at its head by a checkpoint under the record key. Version 1.3, 2026-11-18.",
+  "type": "object",
+  "required": [
+    "event_id",
+    "seq",
+    "market",
+    "record_id",
+    "subject_id",
+    "field",
+    "change",
+    "to_version",
+    "observed_at",
+    "prev_hash",
+    "hash"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "market": {
+      "type": "string"
+    },
+    "object": {
+      "const": "card",
+      "description": "Present on a change to a card (from version 1.3). Absent on history written before it."
+    },
+    "record_id": {
+      "type": "string"
+    },
+    "subject_id": {
+      "type": "string"
+    },
+    "field": {
+      "type": "string",
+      "description": "The part of the card that changed (identity.name, codes.gtin, standing.status, holder ...); * for the whole card."
+    },
+    "change": {
+      "enum": [
+        "set",
+        "changed",
+        "went_unknown",
+        "withdrawn",
+        "restored",
+        "corrected",
+        "reissued",
+        "read_confirmed",
+        "went_stale",
+        "holder_asserted"
+      ],
+      "description": "reissued: the card was signed again in a new shape from the values already held; not a change at the regulator. read_confirmed: a read that found versions unchanged. went_stale and holder_asserted are kept only so that history validates."
+    },
+    "from_version": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "to_version": {
+      "type": "integer"
+    },
+    "effective_from": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "corrects": {
+          "type": "string",
+          "description": "On corrected and restored: the event_id of the event it answers."
+        }
+      }
+    },
+    "prev_hash": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hash": {
+      "type": "string",
+      "description": "SHA-256 of the JCS form of the event without hash."
+    },
+    "confirmed": {
+      "type": "object",
+      "required": [
+        "versions",
+        "sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "versions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "read_at_max": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sha256": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

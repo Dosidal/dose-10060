@@ -4,7 +4,17 @@ Dosidal powers the agentic era of pharma. AI agents and AI labs connect to Dosid
 
 - https://dose-10060.org
 
-## Current: version 1.2 (17 November 2026)
+## Current: version 1.3 (18 November 2026)
+
+- [DOSE-10060_Canonical-Text_v1.3.md](DOSE-10060_Canonical-Text_v1.3.md)
+- [schema/1.3/dose-card.schema.json](schema/1.3/dose-card.schema.json)
+- [schema/1.3/dose-changes.schema.json](schema/1.3/dose-changes.schema.json)
+- [schema/1.3/dose-event.schema.json](schema/1.3/dose-event.schema.json)
+- [schema/1.3/dose-receipt.profile.json](schema/1.3/dose-receipt.profile.json)
+- [schema/1.3/dose-stamp.schema.json](schema/1.3/dose-stamp.schema.json)
+- [examples/example-card.json](examples/example-card.json)
+
+## Superseded: version 1.2 and schema 1.2
 
 - [DOSE-10060_Canonical-Text_v1.2.md](DOSE-10060_Canonical-Text_v1.2.md)
 - [schema/1.2/dose-event.schema.json](schema/1.2/dose-event.schema.json)

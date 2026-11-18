@@ -1,0 +1,633 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dose-10060.org/schema/1.3/dose-card.schema.json",
+  "title": "DOSE-10060 card",
+  "description": "One record of one medicine, complete and signed. Every market uses this shape, these names and this order. Nothing is answered beside a card: a value that is served is inside the signed card with its source and its read date, and unknown is shown as unknown. The signature covers the card without its signature and stamp members. Version 1.3, 2026-11-18.",
+  "type": "object",
+  "required": [
+    "card",
+    "identity",
+    "codes",
+    "standing",
+    "holder",
+    "authority",
+    "standard",
+    "record",
+    "signature"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "card": {
+      "type": "string",
+      "format": "uri",
+      "description": "The card's own permanent address. It never changes."
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "name",
+        "substance",
+        "strength",
+        "form",
+        "pack_size",
+        "market"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/texts"
+        },
+        "substance": {
+          "$ref": "#/$defs/texts"
+        },
+        "strength": {
+          "$ref": "#/$defs/texts"
+        },
+        "form": {
+          "$ref": "#/$defs/texts"
+        },
+        "pack_size": {
+          "$ref": "#/$defs/texts"
+        },
+        "market": {
+          "type": "string",
+          "description": "The market of the record: a two-letter code; EU for the central register."
+        }
+      }
+    },
+    "codes": {
+      "type": "object",
+      "required": [
+        "gtin",
+        "national_pack_code",
+        "authorisation_number"
+      ],
+      "additionalProperties": false,
+      "description": "The three codes a card is found by, whichever the regulator publishes.",
+      "properties": {
+        "gtin": {
+          "type": "object",
+          "required": [
+            "value",
+            "state",
+            "basis",
+            "source",
+            "publisher",
+            "read"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "object",
+                "required": [
+                  "system",
+                  "value"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "system": {
+                    "type": "string",
+                    "description": "The code system as the source names it; gtin for a pack barcode."
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "minItems": 1
+            },
+            "state": {
+              "enum": [
+                "known",
+                "unknown"
+              ],
+              "description": "unknown: the regulator's file holds no value. Then value is null and there is no source."
+            },
+            "basis": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "published_by_authority, or derived_from_register where the authority publishes the rule that makes the barcode from its national code."
+            },
+            "source": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri",
+              "description": "The regulator's page the value was read from."
+            },
+            "publisher": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Who publishes that page."
+            },
+            "read": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time",
+              "description": "When the value was read from that page."
+            }
+          }
+        },
+        "national_pack_code": {
+          "type": "object",
+          "required": [
+            "value",
+            "state",
+            "source",
+            "publisher",
+            "read"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "object",
+                "required": [
+                  "system",
+                  "value"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "system": {
+                    "type": "string",
+                    "description": "The code system as the source names it; gtin for a pack barcode."
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "minItems": 1
+            },
+            "state": {
+              "enum": [
+                "known",
+                "unknown"
+              ],
+              "description": "unknown: the regulator's file holds no value. Then value is null and there is no source."
+            },
+            "source": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri",
+              "description": "The regulator's page the value was read from."
+            },
+            "publisher": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Who publishes that page."
+            },
+            "read": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time",
+              "description": "When the value was read from that page."
+            }
+          }
+        },
+        "authorisation_number": {
+          "type": "object",
+          "required": [
+            "value",
+            "state",
+            "source",
+            "publisher",
+            "read"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "object",
+                "required": [
+                  "system",
+                  "value"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "system": {
+                    "type": "string",
+                    "description": "The code system as the source names it; gtin for a pack barcode."
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "minItems": 1
+            },
+            "state": {
+              "enum": [
+                "known",
+                "unknown"
+              ],
+              "description": "unknown: the regulator's file holds no value. Then value is null and there is no source."
+            },
+            "source": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri",
+              "description": "The regulator's page the value was read from."
+            },
+            "publisher": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Who publishes that page."
+            },
+            "read": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time",
+              "description": "When the value was read from that page."
+            }
+          }
+        }
+      }
+    },
+    "standing": {
+      "type": "object",
+      "required": [
+        "status",
+        "pack_status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "object",
+          "required": [
+            "value",
+            "state",
+            "date",
+            "source",
+            "publisher",
+            "read"
+          ],
+          "additionalProperties": false,
+          "description": "The status with the regulator, in the regulator's own term. A record that is no longer in the regulator's file reads withdrawn, with the date it was first found gone and the regulator's last published term.",
+          "properties": {
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "enum": [
+                "known",
+                "unknown",
+                "conflict"
+              ],
+              "description": "conflict: two registers of the same regulator disagree; no term is served."
+            },
+            "date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "The date the status took effect, as published; for withdrawn, the date the record was first found gone."
+            },
+            "last_published": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Only with withdrawn: the regulator's last published term."
+            },
+            "source": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri",
+              "description": "The regulator's page the value was read from."
+            },
+            "publisher": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Who publishes that page."
+            },
+            "read": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time",
+              "description": "When the value was read from that page."
+            }
+          }
+        },
+        "pack_status": {
+          "type": "object",
+          "required": [
+            "value",
+            "state",
+            "source",
+            "publisher",
+            "read"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "The pack's own status term, where the regulator publishes one."
+            },
+            "state": {
+              "enum": [
+                "known",
+                "unknown"
+              ],
+              "description": "unknown: the regulator's file holds no value. Then value is null and there is no source."
+            },
+            "source": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri",
+              "description": "The regulator's page the value was read from."
+            },
+            "publisher": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Who publishes that page."
+            },
+            "read": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time",
+              "description": "When the value was read from that page."
+            }
+          }
+        }
+      }
+    },
+    "holder": {
+      "type": "object",
+      "required": [
+        "value",
+        "state",
+        "as",
+        "source",
+        "publisher",
+        "read"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "state": {
+          "enum": [
+            "known",
+            "unknown"
+          ],
+          "description": "unknown: the regulator's file holds no value. Then value is null and there is no source."
+        },
+        "as": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The role the regulator publishes the name under: holder, applicant, company, supplier, labeler ..."
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri",
+          "description": "The regulator's page the value was read from."
+        },
+        "publisher": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Who publishes that page."
+        },
+        "read": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "description": "When the value was read from that page."
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The regulator. The regulator is the cited source, never the signer."
+        }
+      }
+    },
+    "standard": {
+      "type": "object",
+      "required": [
+        "name",
+        "version",
+        "schema"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "const": "DOSE-10060"
+        },
+        "version": {
+          "const": "1.3"
+        },
+        "schema": {
+          "const": "1.3"
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "required": [
+        "id",
+        "level",
+        "version",
+        "supersedes",
+        "produced_at"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "level": {
+          "enum": [
+            "pack",
+            "authorisation"
+          ],
+          "description": "pack; authorisation where the market publishes no pack level, or the authorisation has no pack."
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "A new version only when a served value changes."
+        },
+        "supersedes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The version before this one. Versions signed under DOSE-10060 1.0 to 1.2 stay as history."
+        },
+        "produced_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "required": [
+        "alg",
+        "kid",
+        "canon",
+        "sig"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "alg": {
+          "const": "ES256"
+        },
+        "kid": {
+          "type": "string"
+        },
+        "canon": {
+          "const": "JCS"
+        },
+        "sig": {
+          "type": "string"
+        }
+      }
+    },
+    "stamp": {
+      "description": "Attached when the card is served; not signed with the card. Null until the market's first full read under version 1.3.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://dose-10060.org/schema/1.3/dose-stamp.schema.json"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "texts": {
+      "type": "object",
+      "required": [
+        "value",
+        "state",
+        "source",
+        "publisher",
+        "read"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "The value or values exactly as the regulator publishes them."
+        },
+        "state": {
+          "enum": [
+            "known",
+            "unknown"
+          ],
+          "description": "unknown: the regulator's file holds no value. Then value is null and there is no source."
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri",
+          "description": "The regulator's page the value was read from."
+        },
+        "publisher": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Who publishes that page."
+        },
+        "read": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "description": "When the value was read from that page."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+ "card": "https://dosidal.ai/pack/fr/03400921846133",
+ "identity": {
+  "name": {
+   "value": [
+    "PRAVASTATINE VIATRIS 20 mg, comprimÃ© pelliculÃ© sÃ©cable"
+   ],
+   "state": "known",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_CIP_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:34Z"
+  },
+  "substance": {
+   "value": [
+    "PRAVASTATINE SODIQUE"
+   ],
+   "state": "known",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_COMPO_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:36Z"
+  },
+  "strength": {
+   "value": null,
+   "state": "unknown",
+   "source": null,
+   "publisher": null,
+   "read": null
+  },
+  "form": {
+   "value": [
+    "comprimÃ© pelliculÃ© sÃ©cable"
+   ],
+   "state": "known",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:32Z"
+  },
+  "pack_size": {
+   "value": [
+    "plaquette(s) thermoformÃ©e(s) PVC PVDC aluminium de 28 comprimÃ©(s)"
+   ],
+   "state": "known",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_CIP_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:34Z"
+  },
+  "market": "FR"
+ },
+ "codes": {
+  "gtin": {
+   "value": [
+    {
+     "system": "gtin",
+     "value": "03400921846133"
+    }
+   ],
+   "state": "known",
+   "basis": "published_by_authority",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_CIP_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:34Z"
+  },
+  "national_pack_code": {
+   "value": [
+    {
+     "system": "cip13",
+     "value": "3400921846133"
+    },
+    {
+     "system": "cip7",
+     "value": "2184613"
+    }
+   ],
+   "state": "known",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_CIP_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:34Z"
+  },
+  "authorisation_number": {
+   "value": [
+    {
+     "system": "cis",
+     "value": "61823920"
+    }
+   ],
+   "state": "known",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:32Z"
+  }
+ },
+ "standing": {
+  "status": {
+   "value": "Autorisation active",
+   "state": "known",
+   "date": "2006-01-23",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:32Z"
+  },
+  "pack_status": {
+   "value": "PrÃ©sentation active",
+   "state": "known",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_CIP_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:34Z"
+  }
+ },
+ "holder": {
+  "value": [
+   "VIATRIS SANTE"
+  ],
+  "state": "known",
+  "as": "holder",
+  "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_bdpm.txt",
+  "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+  "read": "2026-11-15T11:14:32Z"
+ },
+ "authority": {
+  "name": "ANSM"
+ },
+ "standard": {
+  "name": "DOSE-10060",
+  "version": "1.3",
+  "schema": "1.3"
+ },
+ "record": {
+  "id": "fr:presentation:cip13:3400921846133",
+  "level": "pack",
+  "version": 3,
+  "supersedes": 2,
+  "produced_at": "2026-11-17T22:27:22Z"
+ },
+ "signature": {
+  "alg": "ES256",
+  "kid": "dosidal-record-1.9dbf5d53",
+  "canon": "JCS",
+  "sig": "Jsu5dgW48XSaiOUAwZX5ONZJqJDJIaeBf7UbE5qk6u68WU3vdooUxoRvVS7u01jHbGo8cKRFsw137yhcA2msZQ"
+ },
+ "stamp": {
+  "checked": "2026-11-17",
+  "covers": {
+   "cards": 22555,
+   "head_hash": "4b6ad9d8619a4e2c477600d8aabab8a70d677bd277ed302f16787b0acc95f1be",
+   "seq": 171742
+  },
+  "kid": "dosidal-record-1.9dbf5d53",
+  "market": "FR",
+  "read_at": "2026-11-17T23:08:00Z",
+  "sig": "8rpdPGfByYbr5jMKBRGEa9qNU91oaVFluuuicnzyJiXjidKWc8WH__gvYsW2XPfoH06aQcAb7YbP-WZOKmv9Uw",
+  "standard": "DOSE-10060",
+  "standard_version": "1.3",
+  "type": "stamp"
+ }
+}
