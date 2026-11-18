@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://dose-10060.org/schema/1.3/dose-receipt.profile.json",
   "title": "DOSE-10060 receipt",
-  "description": "One signed receipt per fetch: which card was read, and when. A receipt is written alongside the answer, after it has gone; the caller does not wait for it and reads it by its id. It holds a hash of what was asked, never the text. Receipts form one hash chain per issuing region, each under its own key. Version 1.3, 2026-11-18. Amended 18 November 2026: receipt v 4. The chain name is out of the receipt id and is the receipt's own chain field; the id given with the answer is the receipt's own id whichever region signs. Reading a card's page is a fetch and leaves a receipt. A voluntary test payment gets its own receipt (kind test_payment). Earlier receipts keep their ids: v 3 of 18 November 2026 (rco-dosidal:<chain>:<uuid>; where the region named could not write, another wrote under its own chain name and the same uuid) and v 2 of 16 to 18 November 2026. The closing entry of a closed chain, and the receipts of the closed chains fr, wus2 and sea, are answered by id, hash, signature and place only and are outside this profile.",
+  "description": "One signed receipt per fetch: which card was read, and when. A receipt is written alongside the answer, after it has gone; the caller does not wait for it and reads it by its id. It holds a hash of what was asked, never the text. Receipts form one hash chain per issuing region, each under its own key. Version 1.3, 2026-11-18. Amended 18 November 2026: receipt v 4. The chain name is out of the receipt id and is the receipt's own chain field; the id given with the answer is the receipt's own id whichever region signs. Reading a card's page is a fetch and leaves a receipt. A voluntary test payment gets its own receipt (kind test_payment). Earlier receipts keep their ids: v 3 of 18 November 2026 (rco-dosidal:<chain>:<uuid>; where the region named could not write, another wrote under its own chain name and the same uuid) and v 2 of 16 to 18 November 2026. The closing entry of a closed chain, and the receipts of the closed chains fr, wus2 and sea, are answered by id, hash, signature and place only and are outside this profile. Amended 18 November 2026 (second note): in the test-payment receipt, the descriptions of caller and cleared_at now speak of a payment; no field and no rule is changed.",
   "oneOf": [
     {
       "title": "Receipt of a fetch, v 4 (from 18 November 2026)",
@@ -159,12 +159,12 @@
         },
         "caller": {
           "type": "string",
-          "description": "public for an open read."
+          "description": "Always public. The wallet the payment came from is in payment.payer; which caller's statement the receipt is on is kept beside the chain, never inside the receipt."
         },
         "cleared_at": {
           "type": "string",
           "format": "date-time",
-          "description": "When the card was read."
+          "description": "When the payment was received."
         },
         "prev_hash": {
           "type": [

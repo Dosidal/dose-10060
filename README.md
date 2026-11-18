@@ -30,6 +30,8 @@ Dosidal powers the agentic era of pharma. AI agents and AI labs connect to Dosid
 - [schema/1.0/dose-record.schema.json](schema/1.0/dose-record.schema.json)
 - [schema/1.0/dose-refusal.schema.json](schema/1.0/dose-refusal.schema.json)
 
+Dosidal follows VSA-3CS (Visible, Self-serve, A receipt, three Codes, Stamp): [vsa-3cs.org](https://vsa-3cs.org).
+
 Artificial intelligence makes mistakes. Dosidal is an information source, not a recommendation. Read the regulator.
 
 © 2027 Dosidal AI Corp.
