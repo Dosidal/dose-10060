@@ -1,0 +1,146 @@
+{
+ "card": "https://dosidal.ai/record/fr:substance:00001",
+ "identity": {
+  "name": {
+   "value": [
+    "CHLORHYDRATE DE LOPÃ‰RAMIDE"
+   ],
+   "state": "known",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_COMPO_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:36Z"
+  },
+  "substance": {
+   "value": [
+    "CHLORHYDRATE DE LOPÃ‰RAMIDE"
+   ],
+   "state": "known",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_COMPO_bdpm.txt",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:36Z"
+  },
+  "strength": {
+   "value": null,
+   "state": "unknown",
+   "source": null,
+   "publisher": null,
+   "read": null
+  },
+  "form": {
+   "value": null,
+   "state": "unknown",
+   "source": null,
+   "publisher": null,
+   "read": null
+  },
+  "pack_size": {
+   "value": null,
+   "state": "unknown",
+   "source": null,
+   "publisher": null,
+   "read": null
+  },
+  "market": "FR"
+ },
+ "codes": {
+  "gtin": {
+   "value": null,
+   "state": "unknown",
+   "basis": null,
+   "source": null,
+   "publisher": null,
+   "read": null
+  },
+  "national_pack_code": {
+   "value": null,
+   "state": "unknown",
+   "source": null,
+   "publisher": null,
+   "read": null
+  },
+  "authorisation_number": {
+   "value": null,
+   "state": "unknown",
+   "source": null,
+   "publisher": null,
+   "read": null
+  }
+ },
+ "standing": {
+  "status": {
+   "value": null,
+   "state": "unknown",
+   "date": null,
+   "source": null,
+   "publisher": null,
+   "read": null
+  },
+  "pack_status": {
+   "value": null,
+   "state": "unknown",
+   "source": null,
+   "publisher": null,
+   "read": null
+  }
+ },
+ "holder": {
+  "value": null,
+  "state": "unknown",
+  "as": null,
+  "source": null,
+  "publisher": null,
+  "read": null
+ },
+ "as_published": [
+  {
+   "label": "bdpm-substance-code",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:36Z",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_COMPO_bdpm.txt",
+   "value": "00001"
+  },
+  {
+   "label": "bdpm-substance-name",
+   "publisher": "ANSM / MinistÃ¨re de la SantÃ© (BDPM)",
+   "read": "2026-11-15T11:14:36Z",
+   "source": "https://base-donnees-publique.medicaments.gouv.fr/download/file/CIS_COMPO_bdpm.txt",
+   "value": "CHLORHYDRATE DE LOPÃ‰RAMIDE"
+  }
+ ],
+ "authority": {
+  "name": "ANSM"
+ },
+ "standard": {
+  "name": "DOSE-10060",
+  "version": "1.3",
+  "schema": "1.3"
+ },
+ "record": {
+  "id": "fr:substance:00001",
+  "level": "substance",
+  "version": 3,
+  "supersedes": 2,
+  "produced_at": "2026-11-18T01:49:07Z"
+ },
+ "signature": {
+  "alg": "ES256",
+  "kid": "dosidal-record-1.9dbf5d53",
+  "canon": "JCS",
+  "sig": "wA9ysh5OZ-Pll374inUNLXzR3Inlh5-R7XKbzl71_vKuAGRuvjs1peyTMXYLVYUJLcbwNGo1v8g1a4FsF6uz9A"
+ },
+ "stamp": {
+  "checked": "2026-11-18",
+  "covers": {
+   "cards": 22555,
+   "head_hash": "c638a4586b5f4d9d57ca49cf5a407cec843ea5a7b1dfc156c3aa780615878d93",
+   "seq": 171743
+  },
+  "kid": "dosidal-record-1.9dbf5d53",
+  "market": "FR",
+  "read_at": "2026-11-18T01:27:54Z",
+  "sig": "wnOZeY0dAAsbiLOQN7EVDiMcU_QUaOc7trVMz7Puc8zUBPOGrP8L_Eymgrcvg-V4un0XnjXsrzrLcFhzomG7Mw",
+  "standard": "DOSE-10060",
+  "standard_version": "1.3",
+  "type": "stamp"
+ }
+}

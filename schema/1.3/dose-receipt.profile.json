@@ -2,10 +2,246 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://dose-10060.org/schema/1.3/dose-receipt.profile.json",
   "title": "DOSE-10060 receipt",
-  "description": "One signed receipt per fetch: which card was read, and when. A receipt is written alongside the answer, after it has gone; the caller does not wait for it and reads it by its id. It holds a hash of what was asked, never the text. Receipts form one hash chain per issuing region, each under its own key. Version 1.3, 2026-11-18.",
+  "description": "One signed receipt per fetch: which card was read, and when. A receipt is written alongside the answer, after it has gone; the caller does not wait for it and reads it by its id. It holds a hash of what was asked, never the text. Receipts form one hash chain per issuing region, each under its own key. Version 1.3, 2026-11-18. Amended 18 November 2026: receipt v 4. The chain name is out of the receipt id and is the receipt's own chain field; the id given with the answer is the receipt's own id whichever region signs. Reading a card's page is a fetch and leaves a receipt. A voluntary test payment gets its own receipt (kind test_payment). Earlier receipts keep their ids: v 3 of 18 November 2026 (rco-dosidal:<chain>:<uuid>; where the region named could not write, another wrote under its own chain name and the same uuid) and v 2 of 16 to 18 November 2026. The closing entry of a closed chain, and the receipts of the closed chains fr, wus2 and sea, are answered by id, hash, signature and place only and are outside this profile.",
   "oneOf": [
     {
-      "title": "Receipt, v 3 (from DOSE-10060 1.3)",
+      "title": "Receipt of a fetch, v 4 (from 18 November 2026)",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "id",
+        "chain",
+        "seq",
+        "kind",
+        "writer",
+        "caller",
+        "query_hash",
+        "cards",
+        "card_count",
+        "market",
+        "rule_version",
+        "cleared_at",
+        "answer_hash",
+        "prev_hash",
+        "hash",
+        "kid",
+        "sig"
+      ],
+      "properties": {
+        "v": {
+          "const": "4"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^rco-dosidal/[0-9a-f-]{36}$",
+          "description": "The receipt's own id, given with the answer. It names no chain."
+        },
+        "chain": {
+          "type": "string",
+          "description": "The chain the receipt is on: the chain of the region that signed it."
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Place on its chain."
+        },
+        "writer": {
+          "type": "string",
+          "description": "The address that answered."
+        },
+        "caller": {
+          "type": "string",
+          "description": "public for an open read."
+        },
+        "cleared_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the card was read."
+        },
+        "prev_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The hash of the receipt before it on the same chain."
+        },
+        "hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "SHA-256 of the JCS form of the receipt without hash, kid and sig."
+        },
+        "kid": {
+          "type": "string",
+          "description": "The chain's key, in the keyring; a retired key stays published."
+        },
+        "sig": {
+          "type": "string",
+          "description": "ES256 (raw r||s, base64url) over the JCS form of the receipt without sig."
+        },
+        "kind": {
+          "const": "fetch"
+        },
+        "query_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "SHA-256 of the JCS form of {\"tool\": \"fetch\", \"code\": what was asked, ends trimmed, in capitals}. What was asked is the code, or the card's address, or, for a card read at its own address, the path of that address."
+        },
+        "cards": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "description": "The cards read, each as <record id>@<version>; the first 50 when a code names more."
+        },
+        "card_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How many cards the answer held; 0 for the empty answer."
+        },
+        "market": {
+          "type": "string",
+          "description": "The market of the cards read; - when none or more than one."
+        },
+        "rule_version": {
+          "type": "string",
+          "description": "The standard version and the access rule applied, joined by +, e.g. 1.3+open-read:fetch."
+        },
+        "answer_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "SHA-256 of the JCS form of the answer exactly as served: the card with its stamp, or the list of cards, or the empty list."
+        }
+      }
+    },
+    {
+      "title": "Receipt of a voluntary test payment, v 4 (from 18 November 2026)",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "id",
+        "chain",
+        "seq",
+        "kind",
+        "writer",
+        "caller",
+        "payment",
+        "rule_version",
+        "cleared_at",
+        "prev_hash",
+        "hash",
+        "kid",
+        "sig"
+      ],
+      "properties": {
+        "v": {
+          "const": "4"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^rco-dosidal/[0-9a-f-]{36}$",
+          "description": "The receipt's own id, given with the answer. It names no chain."
+        },
+        "chain": {
+          "type": "string",
+          "description": "The chain the receipt is on: the chain of the region that signed it."
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Place on its chain."
+        },
+        "writer": {
+          "type": "string",
+          "description": "The address that answered."
+        },
+        "caller": {
+          "type": "string",
+          "description": "public for an open read."
+        },
+        "cleared_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the card was read."
+        },
+        "prev_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The hash of the receipt before it on the same chain."
+        },
+        "hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "SHA-256 of the JCS form of the receipt without hash, kid and sig."
+        },
+        "kid": {
+          "type": "string",
+          "description": "The chain's key, in the keyring; a retired key stays published."
+        },
+        "sig": {
+          "type": "string",
+          "description": "ES256 (raw r||s, base64url) over the JCS form of the receipt without sig."
+        },
+        "kind": {
+          "const": "test_payment"
+        },
+        "rule_version": {
+          "type": "string"
+        },
+        "payment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "currency",
+            "amount",
+            "network",
+            "asset",
+            "payer",
+            "pay_to",
+            "transaction"
+          ],
+          "description": "A voluntary test payment. It unlocks nothing, raises no limit and is never required.",
+          "properties": {
+            "name": {
+              "const": "Voluntary test payment"
+            },
+            "currency": {
+              "enum": [
+                "USDC",
+                "OUSD"
+              ]
+            },
+            "amount": {
+              "type": "string",
+              "description": "In the currency's smallest unit."
+            },
+            "network": {
+              "type": "string"
+            },
+            "asset": {
+              "type": "string"
+            },
+            "payer": {
+              "type": "string",
+              "description": "The wallet the payment came from."
+            },
+            "pay_to": {
+              "type": "string"
+            },
+            "transaction": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Receipt, v 3 (written 18 November 2026; kept on the same chains)",
       "type": "object",
       "required": [
         "v",
@@ -106,7 +342,7 @@
       }
     },
     {
-      "title": "Receipt, v 2 (written 17 and 18 November 2026, before version 1.3; kept on the same chains)",
+      "title": "Receipt, v 2 (written 16 to 18 November 2026, before version 1.3; kept on the same chains)",
       "type": "object",
       "required": [
         "v",
